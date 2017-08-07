@@ -24,7 +24,7 @@ public class LogActivity extends AppCompatActivity {
         @Override
         public void onClick(View V)
         {
-            startActivity(new Intent(LogActivity.this, MenuActivity.class));
+            startActivity(new Intent(LogActivity.this, MainActivity.class));
         }
     };
 }

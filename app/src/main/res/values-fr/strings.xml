@@ -2,4 +2,11 @@
     <string name="app_name">WalkAndPick</string>
     <string name="connection">Connexion !</string>
     <string name="newAccount">Créer un nouveau compte</string>
+    <string name="action_logout">Déconnexion</string>
+    <string name="courses">Parcours</string>
+    <string name="gallery">Photo</string>
+    <string name="map">Carte</string>
+    <string name="search">Recherche</string>
+    <string name="other">Autre</string>
+    <string name="about">A propos</string>
 </resources>

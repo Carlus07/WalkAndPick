@@ -2,4 +2,16 @@
     <string name="app_name">WalkAndPick</string>
     <string name="connection">Connection !</string>
     <string name="newAccount">Create a new account</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_logout">Logout</string>
+    <string name="courses">Courses</string>
+    <string name="gallery">Gallery</string>
+    <string name="map">Map</string>
+    <string name="search">Search</string>
+    <string name="other">Other</string>
+    <string name="about">About</string>
 </resources>
