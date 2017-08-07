@@ -47,7 +47,7 @@
         android:layout_gravity="center"
         android:layout_margin="30dp"
         android:background="#152737"
-        android:text="Connexion !"
+        android:text="@string/connection"
         android:textColor="@android:color/background_light"
         android:textColorLink="@android:color/background_light"
         android:textSize="20sp" />
@@ -59,7 +59,7 @@
         android:layout_gravity="center"
         android:background="#00B2F0"
         android:elevation="0dp"
-        android:text="Créer un nouveau compte"
+        android:text="@string/newAccount"
         android:textColor="@android:color/background_light"
         android:textColorLink="@android:color/background_light" />
 </LinearLayout>

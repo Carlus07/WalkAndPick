@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WalkAndPick</string>
+    <string name="connection">Connexion !</string>
+    <string name="newAccount">Créer un nouveau compte</string>
+</resources>

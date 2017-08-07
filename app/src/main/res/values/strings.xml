@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">WalkAndPick</string>
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
+    <string name="connection">Connection !</string>
+    <string name="newAccount">Create a new account</string>
 </resources>
