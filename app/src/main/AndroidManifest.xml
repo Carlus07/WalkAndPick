@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
     package="com.henallux.walkandpick">
@@ -10,6 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="Application">
+        <activity
+            android:name=".Activity.MenuActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.LogActivity"
+            android:label="test"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
-
 </manifest>
