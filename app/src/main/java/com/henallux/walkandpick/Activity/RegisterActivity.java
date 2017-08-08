@@ -1,6 +1,7 @@
 package com.henallux.walkandpick.Activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -11,6 +12,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.henallux.walkandpick.Application;
+import com.henallux.walkandpick.DataAccess.UserDAO;
+import com.henallux.walkandpick.Model.User;
 import com.henallux.walkandpick.R;
 
 import java.util.regex.Matcher;
@@ -78,9 +82,8 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
                     {
                         if(Password.getText().toString().equals(PasswordBis.getText().toString()))
                         {
-                            //------------------------------------------------
-                            //          A completer avec l'accès à la bd
-                            //------------------------------------------------
+                            User user = new User(Mail.getText().toString(), Name.getText().toString(), FirstName.getText().toString(),City.getText().toString(), Password.getText().toString(),gender.booleanValue());
+                            new RegisterDB().execute(user);
                             startActivity(new Intent(RegisterActivity.this, LogActivity.class));
                         }
                         else Toast.makeText(RegisterActivity.this, R.string.passwordNotSame , Toast.LENGTH_SHORT).show();
@@ -105,6 +108,30 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
             }
         }
     };
+
+    private class RegisterDB extends AsyncTask<User, Void, User>
+    {
+        @Override
+        protected User doInBackground(User...params){
+            UserDAO userDAO = new UserDAO();
+            User user;
+            user = params[0];
+
+            try{
+                user = userDAO.Register(user);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(User user){
+
+        }
+
+    }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
