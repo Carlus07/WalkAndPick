@@ -1,11 +1,18 @@
 package com.henallux.walkandpick.Activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.henallux.walkandpick.Application;
+import com.henallux.walkandpick.DataAccess.CourseDAO;
+import com.henallux.walkandpick.Model.Course;
 import com.henallux.walkandpick.R;
 import com.henallux.walkandpick.Utility.CoursesAdapter;
+
+import java.util.ArrayList;
 
 public class CourseActivity extends AppCompatActivity {
     ListView ListView_Courses;
@@ -15,15 +22,35 @@ public class CourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
 
-        ListView_Courses = (ListView) findViewById(R.id.ListView_Courses);
-        ShowCourses();
+        ListView_Courses = (ListView) findViewById(R.id.listItem);
+        new CourseActivity.LoadCourses().execute();
     }
-    private void ShowCourses()
+
+    private class LoadCourses extends AsyncTask<Void, Void, ArrayList<Course>>
     {
-        if(ListView_Courses == null) ListView_Courses = (ListView) findViewById(R.id.ListView_Courses);
-        // Création et initialisation de l'Adapter pour les Listes
-        CoursesAdapter adapter = new CoursesAdapter(CourseActivity.this, CurrentShoppingList.getProducts());
-        // Initialisation de la liste avec les données
-        ListView_Courses.setAdapter(adapter);
+        @Override
+        protected ArrayList<Course> doInBackground(Void...params){
+            Application app = (Application) getApplicationContext();
+            String token = app.getToken();
+            CourseDAO courseDAO = new CourseDAO();
+            ArrayList<Course> courses = new ArrayList<>();
+            try{
+                courses = courseDAO.getAllCourses(token);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            return courses;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Course> courses){
+            // Création et initialisation de l'Adapter pour les Listes
+            //CoursesAdapter adapter = new CoursesAdapter(CourseActivity.this, R.layout.ListView_Courses, courses);
+            // Initialisation de la liste avec les données
+            ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(getBaseContext(), R.layout.course_holder, courses);
+
+            ListView_Courses.setAdapter(adapter);
+        }
     }
 }

@@ -1,8 +1,11 @@
 package com.henallux.walkandpick.DataAccess;
 
+import com.henallux.walkandpick.Model.Course;
 import com.henallux.walkandpick.Model.Place;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,14 +13,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+public class CourseDAO {
 
-public class PlaceDAO {
-
-    public ArrayList<Place> getAllPlacesFromTheCourse(int courseId, String token){
+    public ArrayList<Course> getAllCourses(String token){
+        ArrayList<Course> courses = new ArrayList<>();
         int responseCode = 0;
-        ArrayList<Place> places = new ArrayList<>();
+
         try{
-            URL url = new URL("http://walkandpickwebapp20170727042830.azurewebsites.net/api/Places/placesByIdCourse/"+courseId);
+            URL url = new URL("http://walkandpickwebapp20170727042830.azurewebsites.net/api/Courses/");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-type","application/json");
@@ -46,18 +49,14 @@ public class PlaceDAO {
                 //Json to places
                 JSONArray jsonArray = new JSONArray((stringJSON));
                 for (int i=0; i<jsonArray.length();i++){
-                    JSONObject jsonPlace = jsonArray.getJSONObject(i);
-                    /*Gson object = new GsonBuilder().create();
-                    place = object.fromJson(jsonPlace.toString(),Place.class);*/
-                    int id = Integer.parseInt(jsonPlace.getString("ID"));
-                    Place place = new Place(
-                            id,
-                            jsonPlace.getString("Name"),
-                            jsonPlace.getString("Description"),
-                            jsonPlace.getString("GPSAdress")
-                            ,jsonPlace.getString("Picture"));
-                            //jsonPlace.getString("Point");
-                    places.add(place);
+                    JSONObject jsonCourse = jsonArray.getJSONObject(i);
+                    Course course = new Course(
+                            jsonCourse.getInt("ID"),
+                            jsonCourse.getString("Name"),
+                            jsonCourse.getDouble("Mileage"),
+                            jsonCourse.getInt("Difficulty"),
+                            jsonCourse.getString("MapLink"));
+                    courses.add(course);
                 }
             }
             connection.disconnect();
@@ -65,6 +64,6 @@ public class PlaceDAO {
         catch (Exception e){
             e.printStackTrace();
         }
-        return places;
+        return courses;
     }
 }

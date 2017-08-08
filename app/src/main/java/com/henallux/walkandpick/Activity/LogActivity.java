@@ -83,6 +83,7 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
             catch (Exception e){
                 e.printStackTrace();
             }
+
             return token;
         }
 

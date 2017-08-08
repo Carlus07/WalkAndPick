@@ -23,18 +23,4 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:scaleType="center"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="30dp"
-            app:srcCompat="@drawable/title" />
-    </LinearLayout>
-
 </android.support.v4.widget.DrawerLayout>

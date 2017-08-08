@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.henallux.walkandpick.Model.Course;
 import com.henallux.walkandpick.R;
@@ -42,13 +43,13 @@ public class CoursesAdapter extends BaseAdapter {
         return courseList.get(position);
     }
 
-    @Override
     public long getItemId(int position) {
-        return courseList.indexOf(position);
+        return courseList.get(position).getId();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         return null;
     }
 }
