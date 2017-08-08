@@ -1,8 +1,18 @@
 package com.henallux.walkandpick.DataAccess;
 
+<<<<<<< HEAD
 import android.app.Application;
 import android.util.JsonReader;
 
+=======
+import android.util.JsonReader;
+
+import com.google.gson.Gson;
+import com.henallux.walkandpick.Model.User;
+
+import org.json.JSONObject;
+
+>>>>>>> master
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -11,7 +21,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
+<<<<<<< HEAD
  * Created by Max on 8/7/2017.
+=======
+ * Created by Max on 8/8/2017.
+>>>>>>> master
  */
 
 public class UserDAO {
@@ -53,4 +67,34 @@ public class UserDAO {
         }
         return token;
     }
+<<<<<<< HEAD
+=======
+
+    public User Register (User user){
+        int responseCode = 0;
+        try{
+            URL url = new URL("http://walkandpickwebapp20170727042830.azurewebsites.net/api/Account/Register");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-type","application/json");
+            connection.setDoOutput(true);
+
+            Gson gson = new Gson();
+            String json = gson.toJson(user);
+            OutputStream outputStream = connection.getOutputStream();
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
+            writer.write(json);
+            writer.flush();
+
+            connection.connect();
+
+            responseCode = connection.getResponseCode();
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return user;
+    }
+>>>>>>> master
 }

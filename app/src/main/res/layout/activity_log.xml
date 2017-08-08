@@ -5,7 +5,7 @@
     android:id="@+id/LogActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00B2F0"
+    android:background="@color/colorBackGround"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -19,24 +19,30 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
-        android:id="@+id/mail"
+        android:id="@+id/mailConnection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:hint="@string/mail"
         android:textColor="@android:color/background_light"
-        android:textColorLink="@android:color/background_light" />
+        android:textColorLink="@android:color/background_light"
+        android:textCursorDrawable="@color/EditText"
+        android:backgroundTint="@color/EditText"/>
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/passwordConnection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:hint="@string/password"
+        android:textCursorDrawable="@color/EditText"
+        android:backgroundTint="@color/EditText"
         android:textColorLink="@android:color/background_light"
         tools:textColor="@android:color/background_light" />
 
@@ -46,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="30dp"
-        android:background="#152737"
+        android:background="@color/colorButton"
         android:text="@string/connection"
         android:textColor="@android:color/background_light"
         android:textColorLink="@android:color/background_light"
@@ -57,7 +63,7 @@
         android:layout_width="213dp"
         android:layout_height="28dp"
         android:layout_gravity="center"
-        android:background="#00B2F0"
+        android:background="@color/colorBackGround"
         android:elevation="0dp"
         android:text="@string/newAccount"
         android:textColor="@android:color/background_light"

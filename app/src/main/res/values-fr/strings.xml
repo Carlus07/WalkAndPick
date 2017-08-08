@@ -2,6 +2,7 @@
     <string name="app_name">WalkAndPick</string>
     <string name="connection">Connexion !</string>
     <string name="newAccount">Créer un nouveau compte</string>
+    <string name="register">Inscription !</string>
     <string name="action_logout">Déconnexion</string>
     <string name="courses">Parcours</string>
     <string name="gallery">Photo</string>
@@ -9,4 +10,19 @@
     <string name="search">Recherche</string>
     <string name="other">Autre</string>
     <string name="about">A propos</string>
+    <string name="name">Nom</string>
+    <string name="firstName">Prénom</string>
+    <string name="gender">Sexe</string>
+    <string name="man">Homme</string>
+    <string name="woman">Femme</string>
+    <string name="mail">Adresse mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="passwordBis">Confirmation du mot de passe</string>
+    <string name="city">Ville</string>
+
+    <!--Erreur -->
+    <string name="mailInvalid">Le format de l\'adresse mail est invalide</string>
+    <string name="emptyField">Veuillez remplir tous les champs !</string>
+    <string name="passwordInvalid">Le mot de passe doit possèder au moins un chiffre, une lettre minuscule, une lettre majuscule, un caractères spécial et doit être de minimum 8 caractères</string>
+    <string name="passwordNotSame">Les mots de passe ne sont pas identiques</string>
 </resources>

@@ -3,4 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="RadioButton">#FFFFFF</color>
+    <color name="EditText">#FFFFFF</color>
+    <color name="colorBackGround">#00B2F0</color>
+    <color name="colorButton">#152737</color>
 </resources>

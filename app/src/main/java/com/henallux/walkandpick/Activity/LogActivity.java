@@ -4,20 +4,39 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.ListView;
 import android.widget.TextView;
+=======
+import android.widget.EditText;
+import android.widget.Toast;
+>>>>>>> master
 
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.DataAccess.UserDAO;
 import com.henallux.walkandpick.R;
 
-public class LogActivity extends AppCompatActivity {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class LogActivity extends AppCompatActivity implements TextWatcher {
 
     Button Button_Connection;
+<<<<<<< HEAD
     String mailTxt;
     String passwordTxt;
+=======
+    Button Button_Register;
+    EditText MailConnection, PasswordConnection;
+    String mailTxt, passwordTxt;
+
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+>>>>>>> master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +44,18 @@ public class LogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log);
 
         Button_Connection = (Button) findViewById(R.id.connection);
-        Button_Connection.setOnClickListener(Test);
+        Button_Connection.setOnClickListener(Connection);
+
+        Button_Register = (Button) findViewById(R.id.newAccount);
+        Button_Register.setOnClickListener(GoRegister);
+
+        MailConnection = (EditText) findViewById(R.id.mailConnection);
+        MailConnection.addTextChangedListener(this);
+
+        PasswordConnection = (EditText) findViewById(R.id.passwordConnection);
+        PasswordConnection.addTextChangedListener(this);
     }
+<<<<<<< HEAD
 
     private View.OnClickListener Test = new View.OnClickListener(){
         @Override
@@ -41,6 +70,35 @@ public class LogActivity extends AppCompatActivity {
     };
 
     private class Connection extends AsyncTask<String, Void, String>
+=======
+    private View.OnClickListener Connection = new View.OnClickListener(){
+        @Override
+        public void onClick(View V)
+        {
+            if ((!MailConnection.getText().toString().equals("")) && (!PasswordConnection.getText().toString().equals("")))
+            {
+                Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(MailConnection.getText().toString());
+                if (matcher.find())
+                {
+                    mailTxt = MailConnection.getText().toString();
+                    passwordTxt = PasswordConnection.getText().toString();
+                    new ConnectionDB().execute();
+                }
+                else Toast.makeText(LogActivity.this, R.string.mailInvalid , Toast.LENGTH_SHORT).show();
+            }
+            else Toast.makeText(LogActivity.this, R.string.emptyField, Toast.LENGTH_SHORT).show();
+        }
+    };
+    private View.OnClickListener GoRegister = new View.OnClickListener(){
+        @Override
+        public void onClick(View V)
+        {
+            startActivity(new Intent(LogActivity.this, RegisterActivity.class));
+        }
+    };
+
+    private class ConnectionDB extends AsyncTask<String, Void, String>
+>>>>>>> master
     {
         @Override
         protected String doInBackground(String...params){
@@ -50,7 +108,11 @@ public class LogActivity extends AppCompatActivity {
                 token = userDAO.Connection(mailTxt,passwordTxt);
             }
             catch (Exception e){
+<<<<<<< HEAD
                e.printStackTrace();
+=======
+                e.printStackTrace();
+>>>>>>> master
             }
             return token;
         }
@@ -64,4 +126,22 @@ public class LogActivity extends AppCompatActivity {
             }
         }
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
+>>>>>>> master
 }

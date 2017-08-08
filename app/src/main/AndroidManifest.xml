@@ -13,11 +13,13 @@
         <activity
             android:name=".Activity.LogActivity"
             android:exported="true"
+<<<<<<< HEAD
             android:label="test"
+=======
+>>>>>>> master
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -27,6 +29,16 @@
             android:label="Menu"
             android:theme="@style/AppTheme.NoActionBar">
 
+        </activity>
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Activity.MainActivity"
+            android:label="Menu"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

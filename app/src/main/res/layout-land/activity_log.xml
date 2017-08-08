@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:background="#00B2F0"
+    android:background="@color/colorBackGround"
     android:columnCount="2"
     android:orientation="vertical"
     android:rowCount="1">
@@ -29,18 +29,19 @@
         android:layout_row="0">
 
         <EditText
-            android:id="@+id/mail"
+            android:id="@+id/mailConnection"
             android:layout_width="222dp"
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_gravity="center"
             android:layout_row="0"
+            android:hint="@string/mail"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/background_light"
             android:textColorLink="@android:color/background_light" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passwordConnection"
             android:layout_width="222dp"
             android:layout_height="wrap_content"
             android:layout_column="0"
@@ -48,6 +49,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_row="1"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColorLink="@android:color/background_light"
             tools:textColor="@android:color/background_light" />
@@ -60,7 +62,7 @@
             android:layout_gravity="center"
             android:layout_margin="30dp"
             android:layout_row="2"
-            android:background="#152737"
+            android:background="@color/colorButton"
             android:text="@string/connection"
             android:textColor="@android:color/background_light"
             android:textColorLink="@android:color/background_light"
@@ -73,7 +75,7 @@
             android:layout_column="0"
             android:layout_gravity="center"
             android:layout_row="3"
-            android:background="#00B2F0"
+            android:background="@color/colorBackGround"
             android:text="@string/newAccount"
             android:textColor="@android:color/background_light"
             android:textColorLink="@android:color/background_light" />
