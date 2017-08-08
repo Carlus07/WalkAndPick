@@ -29,18 +29,19 @@
         android:layout_row="0">
 
         <EditText
-            android:id="@+id/mail"
+            android:id="@+id/mailConnection"
             android:layout_width="222dp"
             android:layout_height="wrap_content"
             android:layout_column="0"
             android:layout_gravity="center"
             android:layout_row="0"
+            android:hint="@string/mail"
             android:inputType="textEmailAddress"
             android:textColor="@android:color/background_light"
             android:textColorLink="@android:color/background_light" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/passwordConnection"
             android:layout_width="222dp"
             android:layout_height="wrap_content"
             android:layout_column="0"
@@ -48,6 +49,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_row="1"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:textColorLink="@android:color/background_light"
             tools:textColor="@android:color/background_light" />

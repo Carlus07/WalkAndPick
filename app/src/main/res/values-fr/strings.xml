@@ -19,4 +19,10 @@
     <string name="password">Mot de passe</string>
     <string name="passwordBis">Confirmation du mot de passe</string>
     <string name="city">Ville</string>
+
+    <!--Erreur -->
+    <string name="mailInvalid">Le format de l\'adresse mail est invalide</string>
+    <string name="emptyField">Veuillez remplir tous les champs !</string>
+    <string name="passwordInvalid">Le mot de passe doit possèder au moins un chiffre, une lettre minuscule, une lettre majuscule, un caractères spécial et doit être de minimum 8 caractères</string>
+    <string name="passwordNotSame">Les mots de passe ne sont pas identiques</string>
 </resources>
