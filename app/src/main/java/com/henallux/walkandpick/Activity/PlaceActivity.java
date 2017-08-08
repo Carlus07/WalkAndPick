@@ -15,12 +15,9 @@ import com.henallux.walkandpick.Model.Place;
 
 import java.util.ArrayList;
 
-/**
- * Created by Max on 8/8/2017.
- */
-
-public class PlacesActivity extends AppCompatActivity{
+public class PlaceActivity extends AppCompatActivity{
     private ListView placeList;
+
     @Override
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

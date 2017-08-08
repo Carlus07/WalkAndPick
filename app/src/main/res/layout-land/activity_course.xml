@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/CourseActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:background="@color/colorBackGround"
+    android:columnCount="2"
+    android:orientation="vertical"
+    android:rowCount="1">
+
+    <ImageView
+        android:id="@+id/courses"
+        android:layout_width="177dp"
+        android:layout_height="163dp"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:layout_row="0"
+        app:srcCompat="@drawable/course" />
+
+    <ListView android:scrollbarAlwaysDrawVerticalTrack="false"
+        android:layout_gravity="fill_vertical"
+        android:layout_width="395dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.1"
+        android:id="@+id/ListView_Courses" />
+
+</GridLayout>
