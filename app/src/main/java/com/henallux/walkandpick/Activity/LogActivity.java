@@ -1,6 +1,7 @@
 package com.henallux.walkandpick.Activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.henallux.walkandpick.Application;
+import com.henallux.walkandpick.DataAccess.UserDAO;
 import com.henallux.walkandpick.R;
 
 import java.util.regex.Matcher;
@@ -20,6 +23,7 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
     Button Button_Connection;
     Button Button_Register;
     EditText MailConnection, PasswordConnection;
+    String mailTxt, passwordTxt;
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -50,11 +54,9 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(MailConnection.getText().toString());
                 if (matcher.find())
                 {
-                    //------------------------------------------------
-                    //          A completer avec l'accès à la bd
-                    //------------------------------------------------
-
-                    startActivity(new Intent(LogActivity.this, MainActivity.class));
+                    mailTxt = MailConnection.getText().toString();
+                    passwordTxt = PasswordConnection.getText().toString();
+                    new ConnectionDB().execute();
                 }
                 else Toast.makeText(LogActivity.this, R.string.mailInvalid , Toast.LENGTH_SHORT).show();
             }
@@ -68,6 +70,31 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
             startActivity(new Intent(LogActivity.this, RegisterActivity.class));
         }
     };
+
+    private class ConnectionDB extends AsyncTask<String, Void, String>
+    {
+        @Override
+        protected String doInBackground(String...params){
+            UserDAO userDAO = new UserDAO();
+            String token=null;
+            try{
+                token = userDAO.Connection(mailTxt,passwordTxt);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            return token;
+        }
+
+        @Override
+        protected void onPostExecute(String token){
+            if(token!=null){
+                Application appObject = (Application) getApplicationContext();
+                appObject.setToken(token);
+                startActivity(new Intent(LogActivity.this, MainActivity.class));
+            }
+        }
+    }
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
