@@ -77,7 +77,6 @@ public class UserDAO {
             connection.connect();
 
             responseCode = connection.getResponseCode();
-
         }
         catch(Exception e){
             e.printStackTrace();

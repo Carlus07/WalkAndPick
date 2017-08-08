@@ -11,17 +11,17 @@ public class Course {
     private int id, difficulty;
     private String name, mapLink;
     private double mileage;
-    private Collection<Point> points;
+    //private Collection<Point> points;
 
     public Course(){}
 
-    public Course(int id, String name, double mileage, int difficulty, String mapLink, Collection<Point> points){
+    public Course(int id, String name, double mileage, int difficulty, String mapLink/*, Collection<Point> points*/){
         this.id = id;
         this.name = name;
         this.mileage = mileage;
         this.difficulty = difficulty;
         this.mapLink = mapLink;
-        this.points = points;
+        //this.points = points;
     }
 
     public String getMapLink() {
@@ -42,7 +42,6 @@ public class Course {
 
     public double getMileage() {
         return mileage;
-
     }
 
     public void setMileage(double mileage) {
