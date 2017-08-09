@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.henallux.walkandpick.Application;
+import com.henallux.walkandpick.DataAccess.CourseDAO;
 import com.henallux.walkandpick.DataAccess.UserDAO;
 import com.henallux.walkandpick.R;
 

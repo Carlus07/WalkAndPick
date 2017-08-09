@@ -45,11 +45,10 @@ public class CourseActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(ArrayList<Course> courses){
-            // Création et initialisation de l'Adapter pour les Listes
-            //CoursesAdapter adapter = new CoursesAdapter(CourseActivity.this, R.layout.ListView_Courses, courses);
-            // Initialisation de la liste avec les données
-            ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(getBaseContext(), R.layout.course_holder, courses);
 
+            // Création et initialisation de l'Adapter pour les Listes
+            CoursesAdapter adapter = new CoursesAdapter(CourseActivity.this, courses);
+            // Initialisation de la liste avec les données
             ListView_Courses.setAdapter(adapter);
         }
     }

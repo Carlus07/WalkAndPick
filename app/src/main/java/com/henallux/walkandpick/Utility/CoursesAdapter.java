@@ -39,7 +39,7 @@ public class CoursesAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Course getItem(int position) {
         return courseList.get(position);
     }
 
@@ -50,6 +50,26 @@ public class CoursesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        return null;
+        LinearLayout layoutItem;
+
+        //(1) : Réutilisation des layouts
+        if (convertView == null)
+        {
+            //Initialisation de notre item à partir du  layout XML "course_holder"
+            layoutItem = (LinearLayout) inflater.inflate(R.layout.course_holder, parent, false);
+        }
+        else layoutItem = (LinearLayout) convertView;
+
+        //(2) : Récupération des TextView de notre layout
+        final TextView courseName = (TextView)layoutItem.findViewById(R.id.courseName);
+        final TextView courseInfo = (TextView)layoutItem.findViewById(R.id.courseInfo);
+
+        //(3) : Renseignement des valeurs
+        Course c = getItem(position);
+        courseName.setText(c.getName());
+        courseInfo.setText(context.getResources().getString(R.string.distance) + " : " + c.getMileage() + "  -  " + context.getResources().getString(R.string.difficulty) + " : " + c.getDifficulty());
+
+        //On retourne l'item créé.
+        return layoutItem;
     }
 }

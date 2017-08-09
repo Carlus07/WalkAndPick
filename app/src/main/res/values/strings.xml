@@ -21,6 +21,8 @@
     <string name="password">Password</string>
     <string name="passwordBis">Password confirmation</string>
     <string name="city">City</string>
+    <string name="distance">Distance</string>
+    <string name="difficulty">Difficulty</string>
 
     <!--Erreur -->
     <string name="mailInvalid">The format of the e-mail address is invalid</string>

@@ -12,7 +12,7 @@
 
     <ImageView
         android:id="@+id/courses"
-        android:layout_width="112dp"
+        android:layout_width="match_parent"
         android:layout_height="99dp"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
@@ -20,10 +20,9 @@
         app:srcCompat="@drawable/course" />
 
     <ListView
+        android:id="@+id/listItem"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_below="@+id/intro"
-        android:id="@+id/listItem"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/courses" />
 
 </RelativeLayout>
