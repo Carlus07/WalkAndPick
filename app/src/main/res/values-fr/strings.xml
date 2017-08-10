@@ -19,6 +19,9 @@
     <string name="password">Mot de passe</string>
     <string name="passwordBis">Confirmation du mot de passe</string>
     <string name="city">Ville</string>
+    <string name="distance">Distance</string>
+    <string name="difficulty">Difficulté</string>
+    <string name="begin">Commencer !</string>
 
     <!--Erreur -->
     <string name="mailInvalid">Le format de l\'adresse mail est invalide</string>

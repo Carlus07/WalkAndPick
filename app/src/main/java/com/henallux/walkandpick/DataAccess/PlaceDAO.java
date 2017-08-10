@@ -1,10 +1,8 @@
 package com.henallux.walkandpick.DataAccess;
 
 import com.henallux.walkandpick.Model.Place;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,9 +10,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * Created by Max on 8/8/2017.
- */
 
 public class PlaceDAO {
 

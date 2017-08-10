@@ -5,8 +5,6 @@ import android.util.JsonReader;
 import com.google.gson.Gson;
 import com.henallux.walkandpick.Model.User;
 
-import org.json.JSONObject;
-
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -14,9 +12,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Created by Max on 8/8/2017.
- */
 
 public class UserDAO {
 

@@ -12,10 +12,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-/**
- * Created by Max on 8/8/2017.
- */
-
 public class CourseDAO {
 
     public ArrayList<Course> getAllCourses(String token){

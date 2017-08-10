@@ -1,29 +1,35 @@
 package com.henallux.walkandpick.Activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.DataAccess.CourseDAO;
 import com.henallux.walkandpick.Model.Course;
+import com.henallux.walkandpick.R;
+import com.henallux.walkandpick.Utility.CoursesAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Created by Max on 8/8/2017.
- */
-
 public class CourseActivity extends AppCompatActivity {
-    private ListView courseList;
+    ListView ListView_Courses;
+
     @Override
-    protected  void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //...
+        setContentView(R.layout.activity_course);
+
+        ListView_Courses = (ListView) findViewById(R.id.listItem);
         new CourseActivity.LoadCourses().execute();
     }
-
 
     private class LoadCourses extends AsyncTask<Void, Void, ArrayList<Course>>
     {
@@ -44,9 +50,21 @@ public class CourseActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(ArrayList<Course> courses){
-            //ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(this, /*Layout de courses*/, courses.toString());
-            //courseList.setAdapter(adapter);
+
+            // Création et initialisation de l'Adapter pour les Listes
+            CoursesAdapter adapter = new CoursesAdapter(CourseActivity.this, courses);
+            // Initialisation de la liste avec les données
+            ListView_Courses.setAdapter(adapter);
+
+            ListView_Courses.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Intent intent = new Intent(CourseActivity.this, PlaceActivity.class);
+                    intent.putExtra("idCourse", (int) id);
+                    startActivity(intent);
+                }
+            });
         }
     }
-
 }
