@@ -23,6 +23,7 @@
     <string name="city">City</string>
     <string name="distance">Distance</string>
     <string name="difficulty">Difficulty</string>
+    <string name="begin">Start !</string>
 
     <!--Erreur -->
     <string name="mailInvalid">The format of the e-mail address is invalid</string>

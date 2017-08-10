@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
     android:orientation="horizontal"
     android:weightSum="1">
 
@@ -11,9 +13,10 @@
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="4px"
         android:layout_marginRight="10px"
-        android:layout_marginTop="4px"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.37"
         app:srcCompat="@drawable/parcours" />
 
@@ -31,14 +34,14 @@
             android:gravity="center_horizontal"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/courseInfo"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 </LinearLayout>

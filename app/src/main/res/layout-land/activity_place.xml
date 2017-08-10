@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/CourseActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,22 +9,37 @@
     android:background="@color/colorBackGround"
     android:columnCount="2"
     android:orientation="vertical"
-    android:rowCount="1">
+    android:rowCount="2">
 
     <ImageView
-        android:id="@+id/courses"
+        android:id="@+id/places"
         android:layout_width="177dp"
         android:layout_height="163dp"
         android:layout_column="0"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
         android:layout_row="0"
-        app:srcCompat="@drawable/course" />
+        app:srcCompat="@drawable/information" />
 
     <ListView
+        android:layout_column="1"
+        android:layout_row="0"
         android:layout_width="416dp"
-        android:layout_height="match_parent"
+        android:layout_height="247dp"
         android:layout_below="@+id/intro"
-        android:id="@+id/listItem"/>
+        android:id="@+id/listItemPlace"/>
+
+    <Button
+        android:id="@+id/goCourse"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_row="1"
+        android:background="@color/colorButton"
+        android:text="@string/begin"
+        android:textColor="@android:color/background_light"
+        android:textColorLink="@android:color/background_light"
+        android:textSize="20sp" />
 
 </GridLayout>
