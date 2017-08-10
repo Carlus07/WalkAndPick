@@ -1,12 +1,5 @@
 package com.henallux.walkandpick.DataAccess;
 
-import android.app.Application;
-import android.content.Context;
-import android.util.JsonReader;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.henallux.walkandpick.Model.Course;
 import com.henallux.walkandpick.Model.Place;
 
 import org.json.JSONArray;
@@ -15,12 +8,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by Max on 8/8/2017.
@@ -62,8 +52,6 @@ public class PlaceDAO {
                 JSONArray jsonArray = new JSONArray((stringJSON));
                 for (int i=0; i<jsonArray.length();i++){
                     JSONObject jsonPlace = jsonArray.getJSONObject(i);
-                    /*Gson object = new GsonBuilder().create();
-                    place = object.fromJson(jsonPlace.toString(),Place.class);*/
                     int id = Integer.parseInt(jsonPlace.getString("ID"));
                     Place place = new Place(
                             id,
@@ -71,7 +59,6 @@ public class PlaceDAO {
                             jsonPlace.getString("Description"),
                             jsonPlace.getString("GPSAdress")
                             ,jsonPlace.getString("Picture"));
-                            //jsonPlace.getString("Point");
                     places.add(place);
                 }
             }
