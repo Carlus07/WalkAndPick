@@ -47,8 +47,6 @@ public class PlaceDAO {
                 JSONArray jsonArray = new JSONArray((stringJSON));
                 for (int i=0; i<jsonArray.length();i++){
                     JSONObject jsonPlace = jsonArray.getJSONObject(i);
-                    /*Gson object = new GsonBuilder().create();
-                    place = object.fromJson(jsonPlace.toString(),Place.class);*/
                     int id = Integer.parseInt(jsonPlace.getString("ID"));
                     Place place = new Place(
                             id,
@@ -56,7 +54,6 @@ public class PlaceDAO {
                             jsonPlace.getString("Description"),
                             jsonPlace.getString("GPSAdress")
                             ,jsonPlace.getString("Picture"));
-                            //jsonPlace.getString("Point");
                     places.add(place);
                 }
             }

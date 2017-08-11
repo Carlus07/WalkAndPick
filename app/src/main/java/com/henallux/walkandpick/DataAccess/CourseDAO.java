@@ -1,7 +1,6 @@
 package com.henallux.walkandpick.DataAccess;
 
 import com.henallux.walkandpick.Model.Course;
-import com.henallux.walkandpick.Model.Place;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,9 +43,8 @@ public class CourseDAO {
                     sb.append(line);
                 }
                 br.close();
-                stringJSON = sb.toString();
 
-                //Json to places
+                stringJSON = sb.toString();
                 JSONArray jsonArray = new JSONArray((stringJSON));
                 for (int i=0; i<jsonArray.length();i++){
                     JSONObject jsonCourse = jsonArray.getJSONObject(i);
