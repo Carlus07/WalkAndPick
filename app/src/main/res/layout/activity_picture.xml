@@ -16,5 +16,16 @@
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp" />
+    <Button
+        android:id="@+id/goNext"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:background="@color/colorButton"
+        android:text="@string/goNext"
+        android:textColor="@android:color/background_light"
+        android:textColorLink="@android:color/background_light"
+        android:textSize="20sp" />
 
 </LinearLayout>

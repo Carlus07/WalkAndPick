@@ -34,10 +34,8 @@ public class PlaceActivity extends AppCompatActivity{
     private ListView ListView_Places;
     private int idCourse;
     Button Button_GoCourse;
-    private double latitude;
-    private double longitude;
-    private Place firstPlace;
     private ArrayList<Place> placesArray;
+    private Place firstPlace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +57,19 @@ public class PlaceActivity extends AppCompatActivity{
         @Override
         public void onClick(View V)
         {
-            /*Uri gmmIntentUri = Uri.parse("google.navigation:q="+firstPlace.getGpsAdress()+"&mode=w");
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");*/
-            Intent placeIntent = new Intent(PlaceActivity.this, DetailPlaceActivity.class);
-            String listSerializedToJson = new Gson().toJson(placesArray);
-            placeIntent.putExtra("places", listSerializedToJson);
-            startActivity(placeIntent);
+/*
+                Uri gmmIntentUri = Uri.parse("google.navigation:q="+ firstPlace.getGpsAdress()+"&mode=w");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);*/
+                 //Notification Job => ServiceLocalisation destroy
+                Intent placeIntent = new Intent(PlaceActivity.this, DetailPlaceActivity.class);
+                placeIntent.putExtra("place", firstPlace);
+                startActivity(placeIntent);
+
+            //}
+
+
         }
     };
 
@@ -94,10 +98,6 @@ public class PlaceActivity extends AppCompatActivity{
             ListView_Places.setAdapter(adapter);
             firstPlace = places.get(0);
             placesArray = places;
-
-            Intent intent = new Intent(PlaceActivity.this, LocationService.class);
-            intent.putExtra("Place", firstPlace.getGpsAdress());
-            startService(intent);
         }
     }
 }

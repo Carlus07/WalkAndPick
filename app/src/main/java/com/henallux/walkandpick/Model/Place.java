@@ -1,5 +1,6 @@
 package com.henallux.walkandpick.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -7,7 +8,7 @@ import java.util.Collection;
  * Created by Max on 8/8/2017.
  */
 
-public class Place {
+public class Place implements Serializable {
     private int id;
     private String name, description, gpsAdress, picture;
     private ArrayList<Point> points;

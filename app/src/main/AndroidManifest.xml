@@ -9,7 +9,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
-
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -69,6 +68,10 @@
         <activity
             android:name=".Activity.MapActivity"
             android:label="@string/title_activity_map"></activity>
+        <activity
+            android:name=".Activity.GalleryActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <service
             android:name=".Utility.LocationService"
             android:label="Thread"></service>
