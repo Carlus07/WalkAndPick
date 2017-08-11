@@ -14,7 +14,6 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.henallux.walkandpick.Application;
