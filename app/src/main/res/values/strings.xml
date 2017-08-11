@@ -26,6 +26,8 @@
     <string name="begin">Start !</string>
     <string name="provider_disabled">Your access to the localization is deactivated!</string>
     <string name="provider_new_status">The provider %1$s has now a new status %2$s</string>
+    <string name="takePicture">Take Picture</string>
+
 
     <!--Erreur -->
     <string name="mailInvalid">The format of the e-mail address is invalid</string>

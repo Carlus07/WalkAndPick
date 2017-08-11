@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.henallux.walkandpick">
-<<<<<<< HEAD
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-=======
-    <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
 
->>>>>>> 57ab1dd45f4324d2354f621ebbc0e62eed5e5a11
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -54,9 +51,18 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".Activity.PictureActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Activity.DetailPlaceActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
             android:name=".Activity.PlaceActivity"
             android:exported="true"
-<<<<<<< HEAD
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -67,15 +73,6 @@
         <service
             android:name=".Utility.LocationService"
             android:label="Thread"></service>
-=======
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".Activity.PictureActivity"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
->>>>>>> 57ab1dd45f4324d2354f621ebbc0e62eed5e5a11
     </application>
 
 </manifest>

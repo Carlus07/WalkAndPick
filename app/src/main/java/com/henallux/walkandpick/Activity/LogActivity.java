@@ -60,7 +60,6 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
         PasswordConnection.addTextChangedListener(this);
     }
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
     private View.OnClickListener Connection = new View.OnClickListener(){
         @Override
         public void onClick(View V)
@@ -100,7 +99,6 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
             catch (Exception e){
                 e.printStackTrace();
             }
-
             return token;
         }
 
@@ -110,6 +108,9 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
                 Application appObject = (Application) getApplicationContext();
                 appObject.setToken(token);
                 startActivity(new Intent(LogActivity.this, MainActivity.class));
+            }
+            else{
+                Toast.makeText(LogActivity.this, "Mail or password invalid", Toast.LENGTH_SHORT).show();
             }
         }
     }

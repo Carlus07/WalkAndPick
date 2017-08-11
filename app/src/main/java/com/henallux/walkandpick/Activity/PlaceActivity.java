@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.DataAccess.PlaceDAO;
 import com.henallux.walkandpick.Model.Place;
@@ -34,10 +35,10 @@ public class PlaceActivity extends AppCompatActivity{
     private ListView ListView_Places;
     private int idCourse;
     Button Button_GoCourse;
-    String mCurrentPhotoPath;
     private double latitude;
     private double longitude;
     private Place firstPlace;
+    private ArrayList<Place> placesArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,16 +56,17 @@ public class PlaceActivity extends AppCompatActivity{
         new LoadPlaces().execute();
     }
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-
     private View.OnClickListener GoCourse = new View.OnClickListener() {
         @Override
         public void onClick(View V)
         {
-            Uri gmmIntentUri = Uri.parse("google.navigation:q="+firstPlace.getGpsAdress()+"&mode=w");
+            /*Uri gmmIntentUri = Uri.parse("google.navigation:q="+firstPlace.getGpsAdress()+"&mode=w");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");
-            startActivity(mapIntent);
+            mapIntent.setPackage("com.google.android.apps.maps");*/
+            Intent placeIntent = new Intent(PlaceActivity.this, DetailPlaceActivity.class);
+            String listSerializedToJson = new Gson().toJson(placesArray);
+            placeIntent.putExtra("places", listSerializedToJson);
+            startActivity(placeIntent);
         }
     };
 
@@ -92,62 +94,11 @@ public class PlaceActivity extends AppCompatActivity{
             // Initialisation de la liste avec les données
             ListView_Places.setAdapter(adapter);
             firstPlace = places.get(0);
+            placesArray = places;
 
             Intent intent = new Intent(PlaceActivity.this, LocationService.class);
             intent.putExtra("Place", firstPlace.getGpsAdress());
             startService(intent);
         }
-    }
-
-    private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if(photoFile != null){
-                Application app = (Application) getApplicationContext();
-
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.henallux.walkandpick.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        }
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-            int i = bitmap.getHeight();
-            int x = bitmap.getWidth();
-            String t = bitmap.toString();
-
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            Intent intent = new Intent(PlaceActivity.this, PictureActivity.class);
-            intent.putExtra("bitmap", byteArray);
-            startActivity(intent);
-        }
-    }
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
     }
 }
