@@ -22,7 +22,8 @@
     <string name="distance">Distance</string>
     <string name="difficulty">Difficulté</string>
     <string name="begin">Commencer !</string>
-
+    <string name="provider_disabled">Votre accès à la localisation est désactivé !</string>
+    <string name="provider_new_status">La source de localisation %1$s est %2$s</string>
     <!--Erreur -->
     <string name="mailInvalid">Le format de l\'adresse mail est invalide</string>
     <string name="emptyField">Veuillez remplir tous les champs !</string>

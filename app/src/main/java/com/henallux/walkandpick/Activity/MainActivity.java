@@ -1,5 +1,6 @@
 package com.henallux.walkandpick.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.henallux.walkandpick.R;
+import com.henallux.walkandpick.Utility.LocationService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_map) {
-
+            startActivity(new Intent(MainActivity.this, MapActivity.class));
         } else if (id == R.id.nav_search) {
 
         } else if (id == R.id.nav_about) {

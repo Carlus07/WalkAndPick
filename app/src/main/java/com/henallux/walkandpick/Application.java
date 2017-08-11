@@ -1,9 +1,12 @@
 package com.henallux.walkandpick;
 
+import android.location.Location;
+
 public class Application extends android.app.Application{
     private String Uri;
     private String Api;
     private String Token;
+    private Location Location;
 
     @Override
     public void onCreate()
@@ -24,4 +27,6 @@ public class Application extends android.app.Application{
     {
         Token = token;
     }
+    public void setLocation(Location location) {Location = location;}
+    public Location getLocation() { return Location;}
 }
