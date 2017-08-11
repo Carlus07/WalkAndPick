@@ -14,7 +14,6 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.DataAccess.PlaceDAO;
