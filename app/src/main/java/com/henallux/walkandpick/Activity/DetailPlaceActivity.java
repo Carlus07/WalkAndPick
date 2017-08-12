@@ -46,7 +46,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
 
         app = (Application) getApplicationContext();
         place = app.getPlaceCurrent();
-        if (place == null) startActivity(new Intent(this, MainActivity.class));
+        if (place == null) startActivity(new Intent(this, FinishActivity.class));
         else
         {
             setContentView(R.layout.activity_detailplace);
