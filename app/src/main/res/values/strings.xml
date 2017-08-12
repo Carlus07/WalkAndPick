@@ -27,13 +27,13 @@
     <string name="provider_disabled">Your access to the localization is deactivated!</string>
     <string name="provider_new_status">The provider %1$s has now a new status %2$s</string>
     <string name="takePicture">Take Picture</string>
-
+    <string name="titleNotification">You have arrived !</string>
+    <string name="descriptionNotification">See description of location</string>
 
     <!--Erreur -->
     <string name="mailInvalid">The format of the e-mail address is invalid</string>
     <string name="emptyField">Please complete all fields !</string>
     <string name="passwordInvalid">The password must have at least one digit, a lowercase letter, a capital letter, a special character and must be a minimum of 8 characters</string>
-    <string name="passwordNotSame">Passwords are not the same
-</string>
+    <string name="passwordNotSame">Passwords are not the same</string>
     <string name="title_activity_map">Map</string>
 </resources>

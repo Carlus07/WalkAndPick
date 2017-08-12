@@ -1,5 +1,7 @@
 package com.henallux.walkandpick.Activity;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +36,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
     Button Button_Picture;
     TextView detailPlace;
+    Application app;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imagePlace;
@@ -41,16 +44,22 @@ public class DetailPlaceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        app = (Application) getApplicationContext();
+        Place place = app.getPlace();
+        if (place == null) startActivity(new Intent(this, FinishActivity.class));
         setContentView(R.layout.activity_detailplace);
+
+        deleteNotification();
         imagePlace = (ImageView) findViewById(R.id.imagePlace);
         detailPlace = (TextView) findViewById(R.id.placeDescription);
 
         Button_Picture = (Button) findViewById(R.id.goPicture);
         Button_Picture.setOnClickListener(GoPicture);
-        String listSerializedToJson = getIntent().getExtras().getString("places");
-        ArrayList<Place> places = new Gson().fromJson(listSerializedToJson, ArrayList.class);
-
-        detailPlace.setText(places.get(0).getDescription());
+        //String listSerializedToJson = getIntent().getExtras().getString("places");
+        //ArrayList<Place> places = new Gson().fromJson(listSerializedToJson, ArrayList.class);
+        detailPlace.setText(place.getDescription());
     }
 
     private View.OnClickListener GoPicture = new View.OnClickListener(){
@@ -111,5 +120,9 @@ public class DetailPlaceActivity extends AppCompatActivity {
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
+    }
+    private void deleteNotification(){
+        final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(2017);
     }
 }

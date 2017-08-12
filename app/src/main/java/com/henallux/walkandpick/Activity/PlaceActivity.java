@@ -4,18 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.DataAccess.PlaceDAO;
 import com.henallux.walkandpick.Model.Place;
@@ -23,26 +17,22 @@ import com.henallux.walkandpick.R;
 import com.henallux.walkandpick.Utility.LocationService;
 import com.henallux.walkandpick.Utility.PlacesAdapter;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PlaceActivity extends AppCompatActivity{
     private ListView ListView_Places;
     private int idCourse;
     Button Button_GoCourse;
-    private double latitude;
-    private double longitude;
     private Place firstPlace;
     private ArrayList<Place> placesArray;
+    Application app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place);
+
+        app = (Application) getApplicationContext();
 
         ListView_Places = (ListView) findViewById(R.id.listItemPlace);
 
@@ -59,13 +49,10 @@ public class PlaceActivity extends AppCompatActivity{
         @Override
         public void onClick(View V)
         {
-            /*Uri gmmIntentUri = Uri.parse("google.navigation:q="+firstPlace.getGpsAdress()+"&mode=w");
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-            mapIntent.setPackage("com.google.android.apps.maps");*/
-            Intent placeIntent = new Intent(PlaceActivity.this, DetailPlaceActivity.class);
-            String listSerializedToJson = new Gson().toJson(placesArray);
-            placeIntent.putExtra("places", listSerializedToJson);
-            startActivity(placeIntent);
+        Uri gmmIntentUri = Uri.parse("google.navigation:q="+firstPlace.getGpsAdress()+"&mode=w");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
         }
     };
 
@@ -73,7 +60,6 @@ public class PlaceActivity extends AppCompatActivity{
     {
         @Override
         protected ArrayList<Place> doInBackground(String...params){
-            Application app = (Application) getApplicationContext();
             String token = app.getToken();
             PlaceDAO placeDAO = new PlaceDAO();
             ArrayList<Place> places = new ArrayList<>();
@@ -94,6 +80,8 @@ public class PlaceActivity extends AppCompatActivity{
             ListView_Places.setAdapter(adapter);
             firstPlace = places.get(0);
             placesArray = places;
+
+            app.setPlaces(places);
 
             Intent intent = new Intent(PlaceActivity.this, LocationService.class);
             intent.putExtra("Place", firstPlace.getGpsAdress());

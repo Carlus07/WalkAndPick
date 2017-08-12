@@ -1,6 +1,9 @@
 package com.henallux.walkandpick.Utility;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +11,19 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.henallux.walkandpick.Activity.DetailPlaceActivity;
+import com.henallux.walkandpick.Activity.MainActivity;
+import com.henallux.walkandpick.R;
 
 public class LocationService extends Service
 {
@@ -21,6 +31,8 @@ public class LocationService extends Service
     public LocationManager locationManager;
     public MyLocationListener listener;
     public Location previousBestLocation = null;
+    public static  int ID_NOTIFICATION = 2017;
+
 
     Intent intent;
     private String[] coordinate;
@@ -29,7 +41,6 @@ public class LocationService extends Service
     public void onCreate()
     {
         super.onCreate();
-       // intent = getIntent();
     }
 
     @Override
@@ -141,7 +152,7 @@ public class LocationService extends Service
                 double meter = DistanceBetweenCoordinates(Double.parseDouble(coordinate[0]), Double.parseDouble(coordinate[1]), location.getLatitude(), location.getLongitude());
                 if (meter <= 15)
                 {
-                    //Emettre la notification pour pouvoir revenir sur l'application
+                    createNotify();
                     onDestroy();
                 }
             }
@@ -149,12 +160,12 @@ public class LocationService extends Service
 
         public void onProviderDisabled(String provider)
         {
-            Toast.makeText( getApplicationContext(), "Gps Disabled", Toast.LENGTH_SHORT ).show();
+            Log.i("Test","Gps Disabled");
         }
 
         public void onProviderEnabled(String provider)
         {
-            Toast.makeText( getApplicationContext(), "Gps Enabled", Toast.LENGTH_SHORT).show();
+            Log.i("Test","Gps Enabled");
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras)
@@ -178,5 +189,21 @@ public class LocationService extends Service
             double result = 2 * Math.atan2(Math.sqrt(calcul), Math.sqrt(1 - calcul));
             return (earth_radius * result);
         }
+    }
+    //Méthode qui créer la notification
+    private void createNotify(){
+
+        NotificationCompat.Builder builder =
+                (NotificationCompat.Builder) new NotificationCompat.Builder(LocationService.this)
+                        .setSmallIcon(R.drawable.notification)
+                        .setContentTitle(this.getResources().getString(R.string.titleNotification))
+                        .setContentText(this.getResources().getString(R.string.descriptionNotification));
+        int NOTIFICATION_ID = 12345;
+
+        Intent targetIntent = new Intent(LocationService.this, DetailPlaceActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(LocationService.this, 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+        NotificationManager nManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        nManager.notify(NOTIFICATION_ID, builder.build());
     }
 }

@@ -24,6 +24,10 @@
     <string name="begin">Commencer !</string>
     <string name="provider_disabled">Votre accès à la localisation est désactivé !</string>
     <string name="provider_new_status">La source de localisation %1$s est %2$s</string>
+    <string name="takePicture">Prendre une photo</string>
+    <string name="titleNotification">Vous êtes arriver !</string>
+    <string name="descriptionNotification">Voir la description de l\'endroit</string>
+
     <!--Erreur -->
     <string name="mailInvalid">Le format de l\'adresse mail est invalide</string>
     <string name="emptyField">Veuillez remplir tous les champs !</string>
