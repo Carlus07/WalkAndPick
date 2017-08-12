@@ -52,6 +52,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailplace);
 
         deleteNotification();
+
         imagePlace = (ImageView) findViewById(R.id.imagePlace);
         detailPlace = (TextView) findViewById(R.id.placeDescription);
 
@@ -59,6 +60,9 @@ public class DetailPlaceActivity extends AppCompatActivity {
         Button_Picture.setOnClickListener(GoPicture);
         //String listSerializedToJson = getIntent().getExtras().getString("places");
         //ArrayList<Place> places = new Gson().fromJson(listSerializedToJson, ArrayList.class);
+        //Intent i = getIntent();
+        //Place place = (Place) i.getSerializableExtra("place");
+
         detailPlace.setText(place.getDescription());
     }
 
@@ -80,9 +84,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             if(photoFile != null){
-                Application app = (Application) getApplicationContext();
-
-                Uri photoURI = FileProvider.getUriForFile(this,
+                Uri photoURI =FileProvider.getUriForFile(this,
                         "com.henallux.walkandpick.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
@@ -94,9 +96,8 @@ public class DetailPlaceActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
-            int i = bitmap.getHeight();
-            int x = bitmap.getWidth();
-            String t = bitmap.toString();
+
+            galleryAddPic();
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -107,11 +108,19 @@ public class DetailPlaceActivity extends AppCompatActivity {
         }
     }
 
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mCurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+    }
+
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = /*Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); */getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */

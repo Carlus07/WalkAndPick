@@ -29,7 +29,8 @@
     <string name="takePicture">Take Picture</string>
     <string name="titleNotification">You have arrived !</string>
     <string name="descriptionNotification">See description of location</string>
-
+    <string name="goNext">Go Next</string>
+    
     <!--Erreur -->
     <string name="mailInvalid">The format of the e-mail address is invalid</string>
     <string name="emptyField">Please complete all fields !</string>

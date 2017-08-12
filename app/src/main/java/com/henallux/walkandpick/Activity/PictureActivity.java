@@ -12,6 +12,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -34,7 +35,7 @@ import java.util.Date;
 
 public class PictureActivity extends AppCompatActivity {
     ImageView imageView ;
-
+    Button Button_NextPlace;
 
 
     @Override
@@ -42,11 +43,22 @@ public class PictureActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture);
 
+        Button_NextPlace = (Button) findViewById(R.id.goNext);
+        Button_NextPlace.setOnClickListener(GoNext);
         imageView= (ImageView) findViewById(R.id.picture);
 
         byte[] byteArray = getIntent().getByteArrayExtra("bitmap");
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         imageView.setImageBitmap(bmp);
     }
+
+    private View.OnClickListener GoNext = new View.OnClickListener(){
+        @Override
+        public void onClick(View V)
+        {
+            startActivity(new Intent(PictureActivity.this, MainActivity.class));
+        }
+    };
+
 
 }

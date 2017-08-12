@@ -49,10 +49,19 @@ public class PlaceActivity extends AppCompatActivity{
         @Override
         public void onClick(View V)
         {
-        Uri gmmIntentUri = Uri.parse("google.navigation:q="+firstPlace.getGpsAdress()+"&mode=w");
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-        startActivity(mapIntent);
+
+            Uri gmmIntentUri = Uri.parse("google.navigation:q="+firstPlace.getGpsAdress()+"&mode=w");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
+            /*Uri gmmIntentUri = Uri.parse("google.navigation:q="+ firstPlace.getGpsAdress()+"&mode=w");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+                 //Notification Job => ServiceLocalisation destroy
+                Intent placeIntent = new Intent(PlaceActivity.this, DetailPlaceActivity.class);
+                placeIntent.putExtra("place", firstPlace);
+                startActivity(placeIntent);*/
         }
     };
 
