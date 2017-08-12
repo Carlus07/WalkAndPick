@@ -27,7 +27,9 @@
     <string name="takePicture">Prendre une photo</string>
     <string name="titleNotification">Vous êtes arriver !</string>
     <string name="descriptionNotification">Voir la description de l\'endroit</string>
-
+    <string name="goMenu">Retour au menu</string>
+    <string name="restart">N\'hésitez pas à recommencer ! </string>
+    <string name="finish">Vous avez terminer le parcours !</string>
     <!--Erreur -->
     <string name="mailInvalid">Le format de l\'adresse mail est invalide</string>
     <string name="emptyField">Veuillez remplir tous les champs !</string>
