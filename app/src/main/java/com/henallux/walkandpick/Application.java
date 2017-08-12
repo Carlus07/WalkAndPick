@@ -54,4 +54,8 @@ public class Application extends android.app.Application{
         order = 0;
         arrayPlace = places;
     }
+    public Place getPlaceCurrent()
+    {
+        return arrayPlace.get(order);
+    }
 }

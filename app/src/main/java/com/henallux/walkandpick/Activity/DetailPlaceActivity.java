@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.Model.Place;
 import com.henallux.walkandpick.R;
+import com.henallux.walkandpick.Utility.LocationService;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -27,10 +28,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-/**
- * Created by Max on 8/11/2017.
- */
 
 public class DetailPlaceActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
@@ -40,6 +37,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     ImageView imagePlace;
+    Place place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,23 +45,25 @@ public class DetailPlaceActivity extends AppCompatActivity {
 
 
         app = (Application) getApplicationContext();
-        Place place = app.getPlace();
-        if (place == null) startActivity(new Intent(this, FinishActivity.class));
-        setContentView(R.layout.activity_detailplace);
+        place = app.getPlaceCurrent();
+        if (place == null) startActivity(new Intent(this, MainActivity.class));
+        else
+        {
+            setContentView(R.layout.activity_detailplace);
+            deleteNotification();
 
-        deleteNotification();
+            imagePlace = (ImageView) findViewById(R.id.imagePlace);
+            detailPlace = (TextView) findViewById(R.id.placeDescription);
 
-        imagePlace = (ImageView) findViewById(R.id.imagePlace);
-        detailPlace = (TextView) findViewById(R.id.placeDescription);
+            Button_Picture = (Button) findViewById(R.id.goPicture);
+            Button_Picture.setOnClickListener(GoPicture);
+            //String listSerializedToJson = getIntent().getExtras().getString("places");
+            //ArrayList<Place> places = new Gson().fromJson(listSerializedToJson, ArrayList.class);
+            //Intent i = getIntent();
+            //Place place = (Place) i.getSerializableExtra("place");
 
-        Button_Picture = (Button) findViewById(R.id.goPicture);
-        Button_Picture.setOnClickListener(GoPicture);
-        //String listSerializedToJson = getIntent().getExtras().getString("places");
-        //ArrayList<Place> places = new Gson().fromJson(listSerializedToJson, ArrayList.class);
-        //Intent i = getIntent();
-        //Place place = (Place) i.getSerializableExtra("place");
-
-        detailPlace.setText(place.getDescription());
+            detailPlace.setText(place.getDescription());
+        }
     }
 
     private View.OnClickListener GoPicture = new View.OnClickListener(){
@@ -99,12 +99,23 @@ public class DetailPlaceActivity extends AppCompatActivity {
 
             galleryAddPic();
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            place = app.getPlace();
+
+            Intent intent = new Intent(DetailPlaceActivity.this, LocationService.class);
+            intent.putExtra("Place", place.getGpsAdress());
+            startService(intent);
+
+            Uri gmmIntentUri = Uri.parse("google.navigation:q="+place.getGpsAdress()+"&mode=w");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
+
+            /*ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] byteArray = stream.toByteArray();
             Intent intent = new Intent(DetailPlaceActivity.this, PictureActivity.class);
             intent.putExtra("bitmap", byteArray);
-            startActivity(intent);
+            startActivity(intent);*/
         }
     }
 
