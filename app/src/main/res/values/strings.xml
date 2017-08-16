@@ -33,6 +33,12 @@
     <string name="goMenu">Go Menu</string>
     <string name="restart">Don\'t hesitate to start again!</string>
     <string name="finish">You have completed the course!</string>
+    <string name="searchPlace">Search !</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="difficult">Difficult</string>
+    <string name="kilometer">Kilometer</string>
+    <string name="beginPlace">Start point</string>
     <!--Erreur -->
     <string name="mailInvalid">The format of the e-mail address is invalid</string>
     <string name="emptyField">Please complete all fields !</string>

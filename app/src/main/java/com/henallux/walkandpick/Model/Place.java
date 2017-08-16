@@ -19,7 +19,10 @@ public class Place implements Serializable {
         this.picture = picture;
       //  this.points = points;
     }
-
+    public String toString()
+    {
+        return name;
+    }
     public int getId() {
         return id;
     }

@@ -41,7 +41,8 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
+    public static final Pattern VALID_PASSWORD_REGEX =
+            Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +70,14 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
                 Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(MailConnection.getText().toString());
                 if (matcher.find())
                 {
-                    String mailTxt = MailConnection.getText().toString();
-                    String passwordTxt = PasswordConnection.getText().toString();
-                    new ConnectionDB().execute(mailTxt,passwordTxt);
+                    matcher = VALID_PASSWORD_REGEX.matcher(PasswordConnection.getText().toString());
+                    if (matcher.find())
+                    {
+                        String mailTxt = MailConnection.getText().toString();
+                        String passwordTxt = PasswordConnection.getText().toString();
+                        new ConnectionDB().execute(mailTxt,passwordTxt);
+                    }
+                    else Toast.makeText(LogActivity.this, R.string.passwordInvalid , Toast.LENGTH_SHORT).show();
                 }
                 else Toast.makeText(LogActivity.this, R.string.mailInvalid , Toast.LENGTH_SHORT).show();
             }

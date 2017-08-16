@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.R;
 import com.henallux.walkandpick.Utility.LocationService;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
     private ImageView imageView;
+    private Application app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         imageView = (ImageView) findViewById(R.id.img);
+
+        app = (Application) getApplicationContext();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,23 +74,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Logout();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -109,38 +106,20 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_map) {
 
         } else if (id == R.id.nav_search) {
-
+            startActivity(new Intent(MainActivity.this, SearchActivity.class));
         } else if (id == R.id.nav_about) {
 
         } else if (id == R.id.nav_logout) {
-
+            Logout();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == RESULT_OK){
-            if(requestCode == IMAGE_GALLERY_REQUEST){
-                Uri imageUri = data.getData();
-
-                InputStream inputStream;
-
-                try {
-                    inputStream = getContentResolver().openInputStream(imageUri);
-
-                    Bitmap image = BitmapFactory.decodeStream(inputStream);
-
-                    imageView.setImageBitmap(image);
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Unable open image",Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-    }*/
+    private void Logout()
+    {
+        app.setToken("");
+        startActivity(new Intent(MainActivity.this, LogActivity.class));
+    }
 }

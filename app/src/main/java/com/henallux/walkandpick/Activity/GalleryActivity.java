@@ -12,10 +12,6 @@ import com.henallux.walkandpick.R;
 
 import java.io.File;
 
-/**
- * Created by Max on 8/11/2017.
- */
-
 public class GalleryActivity extends AppCompatActivity{
 
     ImageView gallery;

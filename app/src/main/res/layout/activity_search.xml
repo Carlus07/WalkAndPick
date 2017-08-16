@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/SearchActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackGround"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/register"
+        android:layout_width="112dp"
+        android:layout_height="99dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/search" />
+
+    <TextView
+        android:id="@+id/difficulty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/difficulty"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:checkedButton="@+id/man"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/easy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:buttonTint="@color/RadioButton"
+            android:text="@string/easy"
+            android:textColor="@android:color/background_light"
+            android:textColorLink="@android:color/background_light" />
+
+        <RadioButton
+            android:id="@+id/medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:buttonTint="@color/RadioButton"
+            android:text="@string/medium"
+            android:textColor="@android:color/background_light" />
+
+        <RadioButton
+            android:id="@+id/difficult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="50dp"
+            android:buttonTint="@color/RadioButton"
+            android:text="@string/difficult"
+            android:textColor="@android:color/background_light" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/kilometer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/kilometer"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/titleSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/seekBarKilometer"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textColorLink="@android:color/background_light"
+        android:textSize="14sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="@android:color/background_light"
+        android:foregroundTint="@android:color/background_light"
+        android:max="15"
+        android:progressTint="@android:color/background_light"
+        android:thumbTint="#FFFFFF"
+        android:tickMarkTint="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/beginPlaceTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:text="@string/beginPlace"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:id="@+id/searchPlace"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:background="@color/colorButton"
+        android:text="@string/searchPlace"
+        android:textColor="@android:color/background_light"
+        android:textColorLink="@android:color/background_light"
+        android:textSize="20sp" />
+
+</LinearLayout>

@@ -30,6 +30,12 @@
     <string name="goMenu">Retour au menu</string>
     <string name="restart">N\'hésitez pas à recommencer ! </string>
     <string name="finish">Vous avez terminer le parcours !</string>
+    <string name="searchPlace">Rechercher !</string>
+    <string name="easy">Facile</string>
+    <string name="medium">Moyen</string>
+    <string name="difficult">Difficile</string>
+    <string name="kilometer">Kilomètre</string>
+    <string name="beginPlace">Point de départ</string>
     <!--Erreur -->
     <string name="mailInvalid">Le format de l\'adresse mail est invalide</string>
     <string name="emptyField">Veuillez remplir tous les champs !</string>
