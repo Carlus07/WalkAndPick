@@ -1,8 +1,11 @@
 package com.henallux.walkandpick.DataAccess;
 
+import android.content.Context;
 import android.util.JsonReader;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.Model.User;
 
 import java.io.InputStream;
@@ -14,12 +17,13 @@ import java.net.URL;
 
 
 public class UserDAO {
+    private int response;
 
     public String Connection (String mail, String password) throws Exception{
         int responseCode = 0;
         String token = null;
         try{
-            URL url = new URL("http://walkandpickwebapp20170727042830.azurewebsites.net/token");
+            URL url = new URL(Application.getUrl() +"/token");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-type"," x-www-form-urlencoded");
@@ -42,21 +46,23 @@ public class UserDAO {
 
                 JSON.nextName();
                 token = JSON.nextString();
+                response = 0;
             }
+            else response = responseCode;
             writer.close();
             outputStream.close();
             connection.disconnect();
         }
         catch (Exception e){
-            e.printStackTrace();
+            response = 1;
         }
         return token;
     }
 
-    public User Register (User user){
+    public void Register (User user){
         int responseCode = 0;
         try{
-            URL url = new URL("http://walkandpickwebapp20170727042830.azurewebsites.net/api/Account/Register");
+            URL url = new URL(Application.getStringApi()+"Account/Register");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-type","application/json");
@@ -71,11 +77,14 @@ public class UserDAO {
 
             connection.connect();
 
-            responseCode = connection.getResponseCode();
+            response = (connection.getResponseCode() != 200) ? connection.getResponseCode() : 0;
         }
         catch(Exception e){
-            e.printStackTrace();
+            response = 1;
         }
-        return user;
+    }
+    public int getError()
+    {
+        return response;
     }
 }

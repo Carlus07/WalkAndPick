@@ -16,6 +16,7 @@ import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.DataAccess.UserDAO;
 import com.henallux.walkandpick.Model.User;
 import com.henallux.walkandpick.R;
+import com.henallux.walkandpick.Utility.ErrorUtility;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     EditText Name, FirstName, Mail, Password, PasswordBis, City;
     RadioButton radio_H, radio_F;
     Boolean gender = true;
+    ErrorUtility errorUtility;
+    UserDAO userDAO;
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -113,12 +116,10 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
     {
         @Override
         protected User doInBackground(User...params){
-            UserDAO userDAO = new UserDAO();
-            User user;
-            user = params[0];
-
+            userDAO = new UserDAO();
+            User user = params[0];
             try{
-                user = userDAO.Register(user);
+                userDAO.Register(user);
             }
             catch (Exception e){
                 e.printStackTrace();
@@ -128,7 +129,8 @@ public class RegisterActivity extends AppCompatActivity implements TextWatcher {
 
         @Override
         protected void onPostExecute(User user){
-
+            errorUtility = new ErrorUtility();
+            if (userDAO.getError() != 0) Toast.makeText(RegisterActivity.this, errorUtility.getError(userDAO.getError()), Toast.LENGTH_SHORT).show();
         }
 
     }

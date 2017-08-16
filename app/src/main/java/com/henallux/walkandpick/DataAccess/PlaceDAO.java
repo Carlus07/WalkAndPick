@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class PlaceDAO {
 
+    private int response;
+
     public ArrayList<Place> getAllPlacesFromTheCourse(int courseId, String token){
         int responseCode = 0;
         ArrayList<Place> places = new ArrayList<>();
@@ -56,11 +58,13 @@ public class PlaceDAO {
                             ,jsonPlace.getString("Picture"));
                     places.add(place);
                 }
+                response = 0;
             }
+            else response = responseCode;
             connection.disconnect();
         }
         catch (Exception e){
-            e.printStackTrace();
+            response = 1;
         }
         return places;
     }
@@ -108,12 +112,18 @@ public class PlaceDAO {
                             ,jsonPlace.getString("Picture"));
                     places.add(place);
                 }
+                response = 0;
             }
+            else response = responseCode;
             connection.disconnect();
         }
         catch (Exception e){
-            e.printStackTrace();
+            response = 1;
         }
         return places;
+    }
+    public int getError()
+    {
+        return response;
     }
 }

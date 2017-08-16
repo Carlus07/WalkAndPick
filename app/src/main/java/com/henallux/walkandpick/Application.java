@@ -1,5 +1,6 @@
 package com.henallux.walkandpick;
 
+import android.content.Context;
 import android.location.Location;
 
 import com.henallux.walkandpick.Model.Place;
@@ -7,8 +8,8 @@ import com.henallux.walkandpick.Model.Place;
 import java.util.ArrayList;
 
 public class Application extends android.app.Application{
-    private String Uri;
-    private String Api;
+    private static String Uri;
+    private static String Api;
     private String Token;
     private int order;
     private ArrayList<Place> arrayPlace;
@@ -22,9 +23,13 @@ public class Application extends android.app.Application{
         order = 0;
     }
 
-    public String getStringApi()
+    public static String getStringApi()
     {
         return Uri + Api;
+    }
+    public static String getUrl()
+    {
+        return Uri;
     }
     public String getToken()
     {

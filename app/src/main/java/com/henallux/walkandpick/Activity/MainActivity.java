@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_search) {
             startActivity(new Intent(MainActivity.this, SearchActivity.class));
         } else if (id == R.id.nav_about) {
-
+            startActivity(new Intent(MainActivity.this, AboutActivity.class));
         } else if (id == R.id.nav_logout) {
             Logout();
         }

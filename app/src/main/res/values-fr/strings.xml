@@ -41,4 +41,15 @@
     <string name="emptyField">Veuillez remplir tous les champs !</string>
     <string name="passwordInvalid">Le mot de passe doit possèder au moins un chiffre, une lettre minuscule, une lettre majuscule, un caractères spécial et doit être de minimum 8 caractères</string>
     <string name="passwordNotSame">Les mots de passe ne sont pas identiques</string>
+    <string name="errorConnection">Votre identifiant ou votre mot de passe est invalide</string>
+    <string name="errorInternet">Impossible de joindre le serveur, vérifier votre connexion internet</string>
+    <!--Erreur server -->
+    <string name="error400">Erreur 400 - La syntaxe de la requête est invalide</string>
+    <string name="error403">Erreur 403 - Vous n\'avez pas les accès nécessaires</string>
+    <string name="error500">Erreur 500 - Erreur interne du serveur</string>
+    <string name="error404">Erreur 404 - La ressource n\'a pas été trouvée</string>
+    <string name="error408">Erreur 408 - Le temps d\'attente est dépassé</string>
+    <string name="error503">Erreur 503 - Le serveur est indisponible</string>
+    <string name="error401">Erreur 401 - Vous n\'avez pas l\'autorisation d\'accèder à la ressource</string>
+    <string name="error">Une erreur inconnue est survenue</string>
 </resources>

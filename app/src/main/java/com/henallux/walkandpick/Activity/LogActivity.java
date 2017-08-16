@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.DataAccess.UserDAO;
 import com.henallux.walkandpick.R;
+import com.henallux.walkandpick.Utility.ErrorUtility;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,6 +39,8 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
     Button Button_Connection;
     Button Button_Register;
     EditText MailConnection, PasswordConnection;
+    UserDAO userDAO;
+    ErrorUtility errorUtility;
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -97,7 +100,7 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
     {
         @Override
         protected String doInBackground(String...params){
-            UserDAO userDAO = new UserDAO();
+            userDAO = new UserDAO();
             String token=null;
             try{
                 token = userDAO.Connection(params[0],params[1]);
@@ -110,13 +113,19 @@ public class LogActivity extends AppCompatActivity implements TextWatcher {
 
         @Override
         protected void onPostExecute(String token){
-            if(token!=null){
-                Application appObject = (Application) getApplicationContext();
-                appObject.setToken(token);
-                startActivity(new Intent(LogActivity.this, MainActivity.class));
+            errorUtility = new ErrorUtility();
+            if (userDAO.getError() == 0)
+            {
+                if(token!=null){
+                    Application appObject = (Application) getApplicationContext();
+                    appObject.setToken(token);
+                    startActivity(new Intent(LogActivity.this, MainActivity.class));
+                }
+                else Toast.makeText(LogActivity.this, R.string.errorConnection, Toast.LENGTH_SHORT).show();
             }
-            else{
-                Toast.makeText(LogActivity.this, "Mail or password invalid", Toast.LENGTH_SHORT).show();
+            else
+            {
+                Toast.makeText(LogActivity.this, errorUtility.getError(userDAO.getError()), Toast.LENGTH_SHORT).show();
             }
         }
     }

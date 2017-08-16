@@ -45,4 +45,16 @@
     <string name="passwordInvalid">The password must have at least one digit, a lowercase letter, a capital letter, a special character and must be a minimum of 8 characters</string>
     <string name="passwordNotSame">Passwords are not the same</string>
     <string name="title_activity_map">Map</string>
+    <string name="errorConnection">Your username or password is invalid</string>
+    <string name="errorInternet">Unable to join server, check your internet connection</string>
+
+    <!--Error Server-->
+    <string name="error400">Error 400 - The syntax of the query is invalid</string>
+    <string name="error403">Error 403 - You don\'t have the necessary access</string>
+    <string name="error500">Error 500 - Internal Server Error</string>
+    <string name="error404">Error 404 - The resource was not found</string>
+    <string name="error408">Error 408 - Wait time is exceeded</string>
+    <string name="error503">Error 503 - The server is unavailable</string>
+    <string name="error401">Error 401 - You don\'t have permission to access the resource</string>
+    <string name="error">An unknown error occurred</string>
 </resources>

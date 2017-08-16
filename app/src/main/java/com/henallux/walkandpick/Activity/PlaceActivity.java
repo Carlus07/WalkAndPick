@@ -9,11 +9,13 @@ import android.view.View;
 
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.DataAccess.PlaceDAO;
 import com.henallux.walkandpick.Model.Place;
 import com.henallux.walkandpick.R;
+import com.henallux.walkandpick.Utility.ErrorUtility;
 import com.henallux.walkandpick.Utility.LocationService;
 import com.henallux.walkandpick.Utility.PlacesAdapter;
 
@@ -22,10 +24,12 @@ import java.util.ArrayList;
 public class PlaceActivity extends AppCompatActivity{
     private ListView ListView_Places;
     private int idCourse;
-    Button Button_GoCourse;
+    private Button Button_GoCourse;
     private Place firstPlace;
     private ArrayList<Place> placesArray;
-    Application app;
+    private Application app;
+    private PlaceDAO placeDAO;
+    private ErrorUtility errorUtility;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +58,6 @@ public class PlaceActivity extends AppCompatActivity{
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
-            /*Uri gmmIntentUri = Uri.parse("google.navigation:q="+ firstPlace.getGpsAdress()+"&mode=w");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
-                 //Notification Job => ServiceLocalisation destroy
-                Intent placeIntent = new Intent(PlaceActivity.this, DetailPlaceActivity.class);
-                placeIntent.putExtra("place", firstPlace);
-                startActivity(placeIntent);*/
         }
     };
 
@@ -70,7 +66,7 @@ public class PlaceActivity extends AppCompatActivity{
         @Override
         protected ArrayList<Place> doInBackground(String...params){
             String token = app.getToken();
-            PlaceDAO placeDAO = new PlaceDAO();
+            placeDAO = new PlaceDAO();
             ArrayList<Place> places = new ArrayList<>();
             try{
                 places = placeDAO.getAllPlacesFromTheCourse(idCourse, token);
@@ -82,19 +78,24 @@ public class PlaceActivity extends AppCompatActivity{
         }
 
         @Override
-        protected void onPostExecute(ArrayList<Place> places){
-            // Création et initialisation de l'Adapter pour les Listes
-            PlacesAdapter adapter = new PlacesAdapter(PlaceActivity.this, places);
-            // Initialisation de la liste avec les données
-            ListView_Places.setAdapter(adapter);
-            firstPlace = places.get(0);
-            placesArray = places;
+        protected void onPostExecute(ArrayList<Place> places) {
+            errorUtility = new ErrorUtility();
+            if (placeDAO.getError() == 0)
+            {
+                // Création et initialisation de l'Adapter pour les Listes
+                PlacesAdapter adapter = new PlacesAdapter(PlaceActivity.this, places);
+                // Initialisation de la liste avec les données
+                ListView_Places.setAdapter(adapter);
+                firstPlace = places.get(0);
+                placesArray = places;
 
-            app.setPlaces(places);
+                app.setPlaces(places);
 
-            Intent intent = new Intent(PlaceActivity.this, LocationService.class);
-            intent.putExtra("Place", firstPlace.getGpsAdress());
-            startService(intent);
+                Intent intent = new Intent(PlaceActivity.this, LocationService.class);
+                intent.putExtra("Place", firstPlace.getGpsAdress());
+                startService(intent);
+            }
+            else Toast.makeText(PlaceActivity.this, errorUtility.getError(placeDAO.getError()), Toast.LENGTH_SHORT).show();
         }
     }
 }
