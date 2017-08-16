@@ -31,8 +31,6 @@ public class LocationService extends Service
     public LocationManager locationManager;
     public MyLocationListener listener;
     public Location previousBestLocation = null;
-    public static  int ID_NOTIFICATION = 2017;
-
 
     Intent intent;
     private String[] coordinate;
@@ -150,7 +148,7 @@ public class LocationService extends Service
                 Log.i("Test", "Latidue : "+location.getLatitude()+ " - Longitude : "+location.getLongitude());
 
                 double meter = DistanceBetweenCoordinates(Double.parseDouble(coordinate[0]), Double.parseDouble(coordinate[1]), location.getLatitude(), location.getLongitude());
-                if (meter <= 15)
+                if (meter <= 50)
                 {
                     createNotify();
                     onDestroy();
@@ -198,7 +196,7 @@ public class LocationService extends Service
                         .setSmallIcon(R.drawable.notification)
                         .setContentTitle(this.getResources().getString(R.string.titleNotification))
                         .setContentText(this.getResources().getString(R.string.descriptionNotification));
-        int NOTIFICATION_ID = 12345;
+        int NOTIFICATION_ID = 2017;
 
         Intent targetIntent = new Intent(LocationService.this, DetailPlaceActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(LocationService.this, 0, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);

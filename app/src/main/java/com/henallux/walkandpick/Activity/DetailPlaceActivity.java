@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,6 +34,7 @@ public class DetailPlaceActivity extends AppCompatActivity {
     String mCurrentPhotoPath;
     Button Button_Picture;
     TextView detailPlace;
+    TextView titlePlace;
     Application app;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -42,7 +44,6 @@ public class DetailPlaceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         app = (Application) getApplicationContext();
         place = app.getPlaceCurrent();
@@ -54,15 +55,18 @@ public class DetailPlaceActivity extends AppCompatActivity {
 
             imagePlace = (ImageView) findViewById(R.id.imagePlace);
             detailPlace = (TextView) findViewById(R.id.placeDescription);
+            titlePlace = (TextView) findViewById(R.id.placeTitle);
 
             Button_Picture = (Button) findViewById(R.id.goPicture);
             Button_Picture.setOnClickListener(GoPicture);
-            //String listSerializedToJson = getIntent().getExtras().getString("places");
-            //ArrayList<Place> places = new Gson().fromJson(listSerializedToJson, ArrayList.class);
-            //Intent i = getIntent();
-            //Place place = (Place) i.getSerializableExtra("place");
 
+            String uri = "@drawable/"+place.getPicture();
+            int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+            Drawable res = getResources().getDrawable(imageResource);
+
+            imagePlace.setImageDrawable(res);
             detailPlace.setText(place.getDescription());
+            titlePlace.setText(place.getName());
         }
     }
 

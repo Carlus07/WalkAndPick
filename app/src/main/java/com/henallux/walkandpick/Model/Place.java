@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by Max on 8/8/2017.
- */
-
 public class Place implements Serializable {
     private int id;
     private String name, description, gpsAdress, picture;
@@ -56,8 +52,10 @@ public class Place implements Serializable {
         this.gpsAdress = gpsAdress;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getPicture()
+    {
+        String [] pictures = picture.split(".j");
+        return pictures[0];
     }
 
     public void setPicture(String picture) {
