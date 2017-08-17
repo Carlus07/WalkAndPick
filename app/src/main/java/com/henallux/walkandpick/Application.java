@@ -20,7 +20,7 @@ public class Application extends android.app.Application{
         super.onCreate();
         Uri = "http://walkandpickwebapp20170727042830.azurewebsites.net/";
         Api = "api/";
-        order = 0;
+        order = 1;
     }
 
     public static String getStringApi()
@@ -50,7 +50,7 @@ public class Application extends android.app.Application{
         }
         else
         {
-            order = 0;
+            order = 1;
             return null;
         }
     }

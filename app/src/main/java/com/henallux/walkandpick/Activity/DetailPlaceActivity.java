@@ -7,16 +7,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.google.gson.Gson;
 import com.henallux.walkandpick.Application;
 import com.henallux.walkandpick.Model.Place;
@@ -29,17 +33,19 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DetailPlaceActivity extends AppCompatActivity {
-    String mCurrentPhotoPath;
-    Button Button_Picture;
-    TextView detailPlace;
-    TextView titlePlace;
-    Application app;
-
+    private String mCurrentPhotoPath;
+    private Button Button_Picture;
+    private TextView detailPlace;
+    private TextView titlePlace;
+    private Application app;
+    private File photoFile;
+    private ImageView imagePlace;
+    private Place place;
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    ImageView imagePlace;
-    Place place;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +87,13 @@ public class DetailPlaceActivity extends AppCompatActivity {
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
             try {
                 photoFile = createImageFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             if(photoFile != null){
-                Uri photoURI =FileProvider.getUriForFile(this,
-                        "com.henallux.walkandpick.fileprovider",
-                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(photoFile));
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
@@ -99,27 +101,45 @@ public class DetailPlaceActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
 
             galleryAddPic();
 
+            new uploadPicture().execute();
+
             place = app.getPlace();
 
+            //Localisation
             Intent intent = new Intent(DetailPlaceActivity.this, LocationService.class);
             intent.putExtra("Place", place.getGpsAdress());
             startService(intent);
 
+            //Google map
             Uri gmmIntentUri = Uri.parse("google.navigation:q="+place.getGpsAdress()+"&mode=w");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             startActivity(mapIntent);
+        }
+        else{
+            //...
+        }
+    }
 
-            /*ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            Intent intent = new Intent(DetailPlaceActivity.this, PictureActivity.class);
-            intent.putExtra("bitmap", byteArray);
-            startActivity(intent);*/
+    private class uploadPicture extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            Map config = new HashMap();
+            config.put("cloud_name", "djxtxdr8l");
+            config.put("api_key", "161485146941155");
+            config.put("api_secret", "CNfky6G5j1dHvj2svdUMrLg3hEQ");
+            Cloudinary cloudinary = new Cloudinary(config);
+            try {
+                Application app = (Application) getApplicationContext();
+                Map x = cloudinary.uploader().upload(mCurrentPhotoPath, ObjectUtils.emptyMap());
+                Log.i("Test",x.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 
@@ -132,16 +152,15 @@ public class DetailPlaceActivity extends AppCompatActivity {
     }
 
     private File createImageFile() throws IOException {
-        // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = /*Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); */getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
+                imageFileName,
+                ".jpg",
+                storageDir
         );
-        // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
