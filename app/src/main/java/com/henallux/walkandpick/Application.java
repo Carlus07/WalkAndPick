@@ -20,7 +20,7 @@ public class Application extends android.app.Application{
         super.onCreate();
         Uri = "http://walkandpickwebapp20170727042830.azurewebsites.net/";
         Api = "api/";
-        order = 1;
+        order = 0;
     }
 
     public static String getStringApi()
@@ -56,11 +56,11 @@ public class Application extends android.app.Application{
     }
     public void setPlaces(ArrayList places)
     {
-        order = 0;
+        order = 1;
         arrayPlace = places;
     }
     public Place getPlaceCurrent()
     {
-        return arrayPlace.get(order);
+        return arrayPlace.get(order-1);
     }
 }

@@ -146,12 +146,14 @@ public class LocationService extends Service
             if(isBetterLocation(location, previousBestLocation))
             {
                 Log.i("Test", "Latidue : "+location.getLatitude()+ " - Longitude : "+location.getLongitude());
-
-                double meter = DistanceBetweenCoordinates(Double.parseDouble(coordinate[0]), Double.parseDouble(coordinate[1]), location.getLatitude(), location.getLongitude());
-                if (meter <= 50)
-                {
-                    createNotify();
-                    onDestroy();
+                if (coordinate[0] != null) {
+                    double meter = DistanceBetweenCoordinates(Double.parseDouble(coordinate[0]), Double.parseDouble(coordinate[1]), location.getLatitude(), location.getLongitude());
+                    if (meter <= 50) {
+                        coordinate[0] = null;
+                        coordinate[1] = null;
+                        createNotify();
+                        onDestroy();
+                    }
                 }
             }
         }
